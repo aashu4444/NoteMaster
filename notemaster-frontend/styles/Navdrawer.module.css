@@ -1,0 +1,3 @@
+.NavdrawerLink{
+    @apply dark:bg-gray-800 bg-blue-500 text-white p-3 flex rounded-md cursor-pointer;
+}

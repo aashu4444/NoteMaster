@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+
+:root{
+	--theme-bg: rgb(59,130,246);
+}
+
+
+.transition-1{
+	transition: 0.15s;
+}
+
+button:disabled{
+	filter: brightness(1.3);
+	pointer-events: none;
+}
+
+.radioButtonContainer .radioTrigger{
+	transition: 0.2s;
+}
+
+.radioButtonContainer .radioInput:checked ~ .radioTrigger{
+	background: var(--theme-bg);
+	color: white;
+}
+
+/*  */
+
+.form-input{
+	@apply p-1 border-2 border-blue-500 rounded-md w-full px-4 bg-transparent outline-none focus:ring-2 duration-300;
+}
+
+.form-input-primary{
+	@apply p-1 border-2 border-blue-500 w-full px-4 bg-transparent outline-none focus:ring-2 duration-300;
+}
+
+.btn{
+	@apply py-2 px-6 shadow-md  transition-1 text-white rounded-full dark:shadow-none;
+}
+
+.btn-primary{
+	@apply py-2 px-6 shadow-md  transition-1 text-white dark:shadow-none;
+}
+
+.btn-rounded-md{
+	@apply py-2 px-6 shadow-md  transition-1 text-white rounded-md dark:shadow-none;
+}
+
+.btn-blue{
+	@apply shadow-blue-400 bg-blue-500 hover:bg-blue-600;
+}
+
+.btn-red{
+	@apply shadow-red-400 bg-red-500 hover:bg-red-600;
+}
+
+.btn-green{
+	@apply shadow-green-400 bg-green-500 hover:bg-green-600;
+}
+
+#signupForm, #loginForm{
+	width: 30rem;
+}
+
+.dropdown{
+    position: relative;
+
+    
+}
+
+
+.dropdown_content{
+	position: absolute;
+	right: 20px;
+	opacity: 0;
+	pointer-events: none;
+	transition: 0.2s;
+	transform: rotate(-11deg);
+	transform-origin: top right;
+	background-color: var(--dropdown-bg);
+	box-shadow: var(--shadow);
+	z-index:9999;
+	
+}
+
+::-moz-scrollbar{
+	width: 10px;
+	background-color: red;
+}
+
+::-moz-scrollbar-thumb{
+	background-color: red;
+}
+
+@keyframes pop{
+	from{
+		transform: scale(0);
+	}
+	to{
+		transform: scale(1);
+	}
+}
