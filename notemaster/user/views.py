@@ -62,7 +62,6 @@ def login_user(request):
                 "password":createHash(password),
             }
             
-            # Insert new user to the database
             user = db.users.find_one(query, {'password': 0})
             
             if user:
@@ -74,7 +73,7 @@ def login_user(request):
                 return HttpResponse(auth_token)
             
             else:
-                return HttpResponse("Invalid credentials") 
+                return HttpResponse("Invalid credentials", status=401) 
         
     except Exception as e:
         return HttpResponse("Internal server error")
