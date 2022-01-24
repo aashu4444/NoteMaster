@@ -28,7 +28,7 @@ const NavItem = (props) => {
 }
 
 const Navdrawer = ({ user }) => {
-    const { loggedin, showNavdrawer, setShowNavdrawer, logout, setShowCreateNoteModal } = useContext(GlobalContext);
+    const { loggedin, showNavdrawer, setShowNavdrawer, logout } = useContext(GlobalContext);
 
 
     function closeNavdrawer() {
@@ -84,14 +84,6 @@ const Navdrawer = ({ user }) => {
                     </>
                     :
                     <>
-
-                        <NavItem
-                            text={<div className="flex items-center gap-x-3">
-                                <i className="fa fa-plus"></i> Create note
-                            </div>}
-                            onClick={() => { setShowCreateNoteModal(true) }}
-
-                        />
                         <NavItem
                             href="/labels"
                             text={<div className="flex items-center gap-x-3">
