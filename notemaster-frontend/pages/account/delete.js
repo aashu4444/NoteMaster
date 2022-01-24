@@ -46,7 +46,7 @@ const Deleteaccount = () => {
                     }
                     <label htmlFor="accountPassword">
                         Account password
-                        <input type="text" name="accountPassword" id="accountPassword" placeholder="Enter your account's password" className="form-input mt-2" ref={password} />
+                        <input type="password" name="accountPassword" id="accountPassword" placeholder="Enter your account's password" className="form-input mt-2" ref={password} />
                     </label>
 
                     <p className="mt-3 text-red-400">Note : Your all data (Notes, Labels, etc...) of NoteMaster will be deleted if your delete your account</p>
