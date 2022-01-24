@@ -2,13 +2,13 @@ import Navbar from "../components/Navbar";
 import Link from 'next/link';
 import axios from 'axios';
 import { url } from "../components/Globals";
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 const Signup = () => {
     const router = useRouter();
 
-    async function createUser(e){
+    async function createUser(e) {
         e.preventDefault();
         const signupForm = document.getElementById("signupForm");
 
@@ -23,14 +23,16 @@ const Signup = () => {
 
     return (
         <>
-        <Head>
-            <title>Create a new account on NoteMaster</title>
-        </Head>
+            <Head>
+                <title>Create a new account on NoteMaster</title>
+            </Head>
 
             <Navbar />
 
-            <div className="flex w-screen justify-center md:mt-6 overflow-x-hidden">
+            <div className="flex w-screen justify-center md:mt-1 overflow-x-hidden">
                 <form id="signupForm" className="md:w-1/2 w-full rounded-md md:shadow-md py-5 px-6 gap-y-6" onSubmit={createUser}>
+
+                    {router.query.accountDeleted === 'true' && <p className="p-3 mb-3 rounded-md bg-green-500 text-white">Account deleted successfully!</p>}
 
                     <div className="grid gap-y-6">
 
