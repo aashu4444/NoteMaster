@@ -3,6 +3,7 @@ import { useRef, useContext, useState } from 'react';
 import axios from 'axios';
 import { url, config } from '../../components/Globals';
 import { GlobalContext } from '../../context/GlobalContext';
+import Head from 'next/head';
 
 
 const Deleteaccount = () => {
@@ -23,7 +24,7 @@ const Deleteaccount = () => {
             },
         })
         .then(res => {
-            logout();
+            logout("/signup?accountDeleted=true");
         })        
         .catch(error => {
             if (error.response.status === 401){
@@ -35,6 +36,9 @@ const Deleteaccount = () => {
     };
 
     return <>
+        <Head>
+            <title>Delete NoteMaster account!</title>
+        </Head>
         <Navbar />
         <div className="flex w-full mt-9 justify-center items-center">
             <form onSubmit={deleteAccount} className="w-96 md:w-96 dark:bg-gray-800 bg-gray-100 shadow-lg shadow-gray-300 dark:shadow-gray-800 rounded-md">
