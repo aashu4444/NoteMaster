@@ -54,7 +54,7 @@ const Navdrawer = ({ user }) => {
                 {
                     left: "-80%"
                 }
-        } className="fixed top-0 left-0 w-72 p-3 h-screen dark:bg-gray-900 bg-white rounded-br-xl rounded-tr-xl transition-all duration-200">
+        } className="fixed top-0 left-0 w-72 p-3 h-screen dark:bg-gray-900 bg-white rounded-br-xl rounded-tr-xl transition-all duration-200 z-10">
             <div className="flex justify-between items-center px-2">
                 <h3 className="text-2xl">NoteMaster</h3>
                 <i className="fa fa-times text-2xl cursor-pointer" onClick={e => closeNavdrawer()}></i>
