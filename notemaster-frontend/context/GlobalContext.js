@@ -17,6 +17,7 @@ const GlobalState = props => {
     const [progress, setProgress] = useState(0);
     const [showNavdrawer, setShowNavdrawer] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(true);
+    const [showReadNoteModal, setShowReadNoteModal] = useState(false);
 
     useEffect(() => {
         const authToken = localStorage.getItem("authToken");
@@ -30,10 +31,10 @@ const GlobalState = props => {
 
     }, []);
 
-    function logout(){
+    function logout(url){
         localStorage.removeItem("authToken");
         setLoggedin(false);
-        router.push("/login");
+        router.push(url===undefined?"/login":url);
     }
 
     return <GlobalContext.Provider value={{
@@ -54,6 +55,8 @@ const GlobalState = props => {
         showNavdrawer,
         isDarkMode,
         setIsDarkMode,
+        showReadNoteModal,
+        setShowReadNoteModal
     }}>
         {props.children}
     </GlobalContext.Provider>
