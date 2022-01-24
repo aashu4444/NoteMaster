@@ -1,32 +1,39 @@
 import Navbar from "../components/Navbar";
 import Link from 'next/link';
 import axios from "axios";
-import {url} from '../components/Globals';
-import {GlobalContext} from '../context/GlobalContext';
-import { useContext } from "react";
+import { url } from '../components/Globals';
+import { GlobalContext } from '../context/GlobalContext';
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Head from 'next/head';
 
 
 const Login = () => {
-    const {setLoggedin} = useContext(GlobalContext);
+    const { setLoggedin } = useContext(GlobalContext);
     const router = useRouter();
+    const [error, setError] = useState(undefined);
 
-    async function loginUser(e){
+    function loginUser(e) {
         e.preventDefault();
         const loginForm = document.getElementById("loginForm");
 
-        const {data} = await axios.post(url('/api/user/login/'), new FormData(loginForm));
+        axios.post(url('/api/user/login/'), new FormData(loginForm)).then(res => {
+            setLoggedin(true);
+            localStorage.setItem("authToken", res.data);
+            loginForm.reset();
+            router.push("/");
+        }).catch(error => {
+            if (error.response.status === 401){
+                setError("Please enter valid credentails");
+            };
+        });
 
-        setLoggedin(true);
-        localStorage.setItem("authToken", data);
-        loginForm.reset();
-        router.push("/");
+
 
 
     }
     return (
-        <> 
+        <>
             <Head>
                 <title>Login to NoteMaster</title>
             </Head>
@@ -34,6 +41,14 @@ const Login = () => {
 
             <div className="flex w-screen justify-center mt-10">
                 <form id="loginForm" className="p-2 md:w-1/3 w-full md:scale-110 rounded-md md:shadow-md py-8 px-6" onSubmit={loginUser}>
+                    {error!==undefined && 
+                    <p className="p-3 rounded-md bg-red-500 text-white">{error}</p>
+                    }
+
+                    {router.query.signupSuccess === 'true' && <p className="p-3 rounded-md bg-green-500 text-white">Account created! you can login now.</p>}
+
+
+                    
 
                     <div className="mt-4 flex gap-y-4 flex-col">
                         <label htmlFor="emailAddress" className="flex flex-col gap-y-2 grow">
