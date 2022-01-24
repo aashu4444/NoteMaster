@@ -96,6 +96,13 @@ const Navdrawer = ({ user }) => {
                         </div>}
                             onClick={() => logout() && closeNavdrawer()}
                         />
+                        <NavItem
+                            href="/account/delete/"
+                            text={<div className="flex items-center gap-x-3">
+                            <i className="fa fa-trash"></i> Delete account
+                        </div>}
+                            
+                        />
                     </>
                 }
 
