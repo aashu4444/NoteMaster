@@ -1,14 +1,13 @@
-import Apibutton from '../Apibutton';
 import { NotesContext } from '../../context/NotesContext';
+import { GlobalContext } from '../../context/GlobalContext';
 import { useContext, useEffect, useState } from 'react';
 import { truncate, url, config } from '../Globals';
 import Link from 'next/link';
-import axios from 'axios';
 import React from 'react';
 
-const Note = ({ note, openEditNoteModal, openManageLabelsModal, setTargetNote }) => {
+const Note = ({ note, openEditNoteModal, openManageLabelsModal, setTargetNote, openReadNoteModal }) => {
     const { deleteNote } = useContext(NotesContext);
-    const { maxLabelsLengthInCard } = config;
+    const {setShowReadNoteModal, setShowOverlay} = useContext(GlobalContext);
     const [currentNote, setCurrentNote] = useState(note);
     const [isMounted, setIsMounted] = useState(false);
 
@@ -29,7 +28,7 @@ const Note = ({ note, openEditNoteModal, openManageLabelsModal, setTargetNote })
             {currentNote.labels !== undefined ?
                 <div className="labels mt-4 mb-2 flex gap-1 flex-wrap">
                     {currentNote.labels.map((item, key) =>
-                        <Link href={`/labels/${item._id.$oid}`} key={key}><a className="p-1 text-white px-3 scale-90 rounded-md bg-blue-500">{item.name}</a></Link>
+                        <Link href={`/labels/${item._id.$oid}?name=${item.name}`} key={key}><a className="p-1 text-white px-3 scale-90 rounded-md z-0 bg-blue-500">{item.name}</a></Link>
                     )}
                 </div>
                 : ""}
@@ -39,9 +38,12 @@ const Note = ({ note, openEditNoteModal, openManageLabelsModal, setTargetNote })
                 {note.timestamp}
             </p>
 
+            <button onClick={e => openReadNoteModal(note)} className="text-gray-600 dark:text-gray-400 mt-2 p-1 bg-gray-300 dark:bg-gray-700 px-3 rounded-md">Read note</button>
+
 
 
             <footer className="mt-5 flex gap-x-3">
+
                 <button className="btn-rounded-md btn-red" onClick={e => { deleteNote(note) }}><i className="fa fa-trash"></i></button>
 
                 <button className="btn-rounded-md btn-blue" onClick={e => openEditNoteModal(note)}><i className="fa fa-edit" ></i></button>
