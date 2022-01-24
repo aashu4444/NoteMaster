@@ -61,7 +61,7 @@ const Managelabels = ({ note }) => {
 
 
                         {labels===undefined||labels.length===0&& 
-                        <p className="bg-red-500 rounded-md p-2 px-4 text-white">Oops ! No labels are available. Plase got <Link href="/labels">labels</Link> page to create a label</p>
+                        <p className="bg-red-500 rounded-md p-2 px-4 text-white">Oops ! No labels are available. Plase got <Link href="/labels"><a>labels</a></Link> page to create a label</p>
                         }
 
                         {labels.map((label, key) => <div key={key} className="flex justify-between dark:bg-gray-800 rounded-md shadow-md dark:shadow-gray-800 bg-gray-300">
