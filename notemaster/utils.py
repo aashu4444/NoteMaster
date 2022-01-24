@@ -1,6 +1,8 @@
+from venv import create
 from pymongo import MongoClient
 import jwt
 from notemaster.settings import SECRET_KEY
+import hashlib
 
 def get_db():
     client = MongoClient('localhost', 27017)
@@ -22,3 +24,16 @@ def loggedin(request):
     
     else:
         return None
+
+
+def createHash(plainText):
+    hash = hashlib.sha256(bytes(plainText, "utf-8")).hexdigest()
+    
+    return hash
+
+def checkHash(plainText, hash):
+    if hashlib.sha256(bytes(plainText, "utf-8")).hexdigest() == hash:
+        return True
+    
+    else:
+        return False
