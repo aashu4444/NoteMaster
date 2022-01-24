@@ -8,6 +8,7 @@ import LoadingBar from 'react-top-loading-bar';
 import Navdrawer from './Navdrawer';
 import Darkmodeswitch from "./Darkmodeswitch";
 import Createnote from './Notes/Createnote';
+import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
     const { loggedin, setShowCreateNoteModal, logout, progress, setProgress, setShowNavdrawer, isDarkMode, setIsDarkMode, showOverlay } = useContext(GlobalContext);
@@ -46,7 +47,6 @@ const Navbar = () => {
                     { opacity: 0.5, pointerEvents: "all" } :
                     { opacity: 0, pointerEvents: "none" }
             }></div>
-            <Createnote />
 
             <nav className="py-4 px-3 shadow-md flex justify-between flex-col md:flex-row gap-y-3 dark:bg-gray-800 items-center dark:text-white">
                 <div className="flex w-full md:w-auto justify-between">
@@ -71,9 +71,6 @@ const Navbar = () => {
 
                         {loggedin === true ?
                             <>
-                                <li>
-                                    <a className="cursor-pointer dark:text-gray-400 dark:hover:text-white transition-all duration-200 text-gray-500 hover:text-black" onClick={e => setShowCreateNoteModal(true)}>Create note</a>
-                                </li>
 
                                 <li>
                                     <Link href="/labels">
@@ -91,7 +88,11 @@ const Navbar = () => {
 
                                         <hr className="mb-3" />
 
-                                        <a className="flex hover:bg-blue-700 rounded-md justify-between p-3 transition-all duration-200 dark:hover:bg-gray-800 cursor-pointer" onClick={e => logout()}>Logout <i className="fa fa-sign-out-alt text-white"></i></a>
+                                        <Link href="/account/delete">
+                                            <a className={styles.dropdownItem} >Delete account <i className="fa fa-trash text-white"></i></a>
+                                        </Link>
+
+                                        <a className={styles.dropdownItem} onClick={e => logout()}>Logout <i className="fa fa-sign-out-alt text-white"></i></a>
                                     </div>
 
                                 </Dropdown>
