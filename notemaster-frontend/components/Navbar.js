@@ -7,7 +7,6 @@ import { url } from "../components/Globals";
 import LoadingBar from 'react-top-loading-bar';
 import Navdrawer from './Navdrawer';
 import Darkmodeswitch from "./Darkmodeswitch";
-import Createnote from './Notes/Createnote';
 import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
@@ -51,7 +50,9 @@ const Navbar = () => {
             <nav className="py-4 px-3 shadow-md flex justify-between flex-col md:flex-row gap-y-3 dark:bg-gray-800 items-center dark:text-white">
                 <div className="flex w-full md:w-auto justify-between">
 
-                    <h1 className="text-2xl text-blue-600 dark:text-white">NoteMaster</h1>
+                    <Link href="/">
+                    <h1 className="text-2xl text-blue-600 dark:text-white cursor-pointer">NoteMaster</h1>
+                    </Link>
 
 
                     <div className="md:hidden flex flex-col gap-y-2 cursor-pointer" onClick={e => setShowNavdrawer(true)}>
