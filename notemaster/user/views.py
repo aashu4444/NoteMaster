@@ -1,10 +1,12 @@
 import json
 from django.shortcuts import render, HttpResponse
-from utils import get_db, loggedin
+from utils import get_db, loggedin, createHash, checkHash
 from django.views.decorators.csrf import csrf_exempt
 from bson import json_util
+from bson.objectid import ObjectId
 import jwt
 from notemaster.settings import SECRET_KEY
+
 
 db = get_db()
 
@@ -24,12 +26,11 @@ def getUser(request):
         return HttpResponse("Internal server error")
 
 
-@csrf_exempt
 def create_user(request):
     try:
         if request.method == "POST":
             # TODO: Create hash of the password
-            password = request.POST["password"]
+            password = createHash(request.POST["password"])
             
             newUserData = {
                 "firstName":request.POST["firstName"],
@@ -45,12 +46,11 @@ def create_user(request):
             return HttpResponse(json_util.dumps(user.inserted_id))
         
     except Exception as e:
-        print(e)
         return HttpResponse("Internal server error")
     
 
     
-@csrf_exempt
+
 def login_user(request):
     try:
         if request.method == "POST":
@@ -59,7 +59,7 @@ def login_user(request):
             
             query = {
                 "email":request.POST["email"],
-                "password":password,
+                "password":createHash(password),
             }
             
             # Insert new user to the database
@@ -81,7 +81,7 @@ def login_user(request):
 
 
     
-@csrf_exempt
+
 def delete_user(request):
     try:
         if request.method == "DELETE":
@@ -91,13 +91,22 @@ def delete_user(request):
                 # TODO: Create hash of password
                 data = json.loads(request.body)
                 
-                password = data["password"]
+                password = data["accountPassword"]
+                userId = ObjectId(user["_id"])
                 
-                db.users.delete_one({"password":password})
+                user = db.users.find_one({"_id":userId})
                 
+                # If the user entered correct password
+                if checkHash(password, user["password"]) == True:
+                    db.users.delete_one({"_id":userId})
+                    db.notes.delete_many({"user":userId})
+                    db.labels.delete_many({"user":userId})
                 
-                return HttpResponse("User deleted")
-            
+                    return HttpResponse("User deleted")
+                
+                else:
+                    return HttpResponse("Incorrect password!", status=401)
+                              
             else:
                 return HttpResponse("Authentication failed!") 
         
