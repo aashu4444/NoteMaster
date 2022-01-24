@@ -5,6 +5,7 @@ import { getToday } from '../Globals';
 import Managelabels from './Managelabels';
 import Editnote from './Editnote';
 import { NotesContext } from '../../context/NotesContext';
+import Createnote from './Createnote';
 
 const Notes = () => {
     const { showOverlay, setShowOverlay, showEditNoteModal, setShowEditNoteModal, setShowManageLabelsModal, setShowCreateNoteModal } = useContext(GlobalContext);
@@ -41,8 +42,12 @@ const Notes = () => {
     return (
         <>
             <Managelabels note={targetNote} />
+            <Createnote />
 
-            
+            <div>
+
+                <button className="btn btn-blue" onClick={e => { setShowCreateNoteModal(true) }}><i className="fa fa-plus mr-2"></i>Create Note</button>
+            </div>
 
             {notes.length === 0 && <p className="p-3 w-full md:w-auto bg-red-500 text-white rounded-md">Oops! you don't have any notes <button onClick={e => { setShowCreateNoteModal(true) }}>Click here</button> to create a note.</p>}
 
