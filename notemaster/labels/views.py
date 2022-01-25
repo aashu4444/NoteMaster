@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 db = get_db()
 
-@csrf_exempt
+
 def createLabel(request):
     try:
         if request.method == "POST":
@@ -70,7 +70,7 @@ def getLabels(request):
         return HttpResponse("Internal server error!")
     
 
-@csrf_exempt
+
 def editLabel(request):
     try:
         if request.method == "PUT":
@@ -96,7 +96,7 @@ def editLabel(request):
         return HttpResponse("Internal server error!")
 
 
-@csrf_exempt
+
 def deleteLabel(request):
     try:
         if request.method == "DELETE":

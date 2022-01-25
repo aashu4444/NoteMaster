@@ -8,7 +8,7 @@ from bson.objectid import ObjectId
 
 db = get_db()
 
-@csrf_exempt
+
 def createNote(request):
     try:
         if request.method == 'POST':
@@ -41,7 +41,7 @@ def createNote(request):
         return HttpResponse("Internal server error")
     
 
-@csrf_exempt
+
 def deleteNote(request):
     try:
         if request.method == 'DELETE':
@@ -63,7 +63,7 @@ def deleteNote(request):
         return HttpResponse("Internal server error")
     
 
-@csrf_exempt
+
 def editNote(request):
     try:
         if request.method == 'PUT':
@@ -113,7 +113,7 @@ def getNotes(request):
         return HttpResponse("Internal server error")
     
 
-@csrf_exempt
+
 def addToLabel(request):
     try:
         if request.method == 'PUT':
@@ -140,7 +140,7 @@ def addToLabel(request):
         return HttpResponse("Internal server error")
 
 
-@csrf_exempt
+
 def removeFromLabel(request):
     try:
         if request.method == 'DELETE':
