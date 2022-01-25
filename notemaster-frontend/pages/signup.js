@@ -4,25 +4,33 @@ import axios from 'axios';
 import { url } from "../components/Globals";
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import {useState} from 'react';
 
 const Signup = () => {
     const router = useRouter();
+    const [error, setError] = useState(undefined);
 
-    async function createUser(e) {
+    function createUser(e) {
         e.preventDefault();
         const signupForm = document.getElementById("signupForm");
 
-        const res = await axios.post(url("/api/user/create/"), new FormData(signupForm));
+        axios.post(url("/api/user/create/"), new FormData(signupForm)).then(res => {
+            signupForm.reset();
 
-        signupForm.reset();
+            // Redirect to login page
+            router.push("/login?signupSuccess=true");
+        }).catch(error => {
+            if (error.response.status === 409){
+                setError("This is email address is aleready in use! please try another one.")
+            }
+        })
 
-        // Redirect to login page
-        router.push("/login?signupSuccess=true");
+
 
     };
 
     return (
-        <>
+        <section className="overflow-x-hidden">
             <Head>
                 <title>Create a new account on NoteMaster</title>
             </Head>
@@ -32,7 +40,9 @@ const Signup = () => {
             <div className="flex w-screen justify-center md:mt-1 overflow-x-hidden">
                 <form id="signupForm" className="md:w-1/2 w-full rounded-md md:shadow-md py-5 px-6 gap-y-6" onSubmit={createUser}>
 
-                    {router.query.accountDeleted === 'true' && <p className="p-3 mb-3 rounded-md bg-green-500 text-white">Account deleted successfully!</p>}
+                    {router.query.accountDeleted === 'true' && error !== undefined && <p className="p-3 mb-3 rounded-md bg-green-500 text-white">Account deleted successfully!</p>}
+
+                    {error !== undefined && <p className="p-3 mb-3 rounded-md bg-red-500 text-white">{error}</p>}
 
                     <div className="grid gap-y-6">
 
@@ -68,7 +78,7 @@ const Signup = () => {
             </div>
 
 
-        </>
+        </section>
     )
 }
 
