@@ -29,13 +29,20 @@ def getUser(request):
 def create_user(request):
     try:
         if request.method == "POST":
+            email = request.POST["email"]
+            
+            # Check that another account with this email exists or not?
+            if db.users.find_one({"email": email}):
+                return HttpResponse("User aleready exists!", status=409)
+            
+            
             # TODO: Create hash of the password
             password = createHash(request.POST["password"])
             
             newUserData = {
                 "firstName":request.POST["firstName"],
                 "lastName":request.POST["lastName"],
-                "email":request.POST["email"],
+                "email":email,
                 "password":password,
                 'userId':f"{request.POST['firstName']}{len(list(db.users.find()))}",
             }
