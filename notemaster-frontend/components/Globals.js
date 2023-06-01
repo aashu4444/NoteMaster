@@ -1,5 +1,5 @@
 export const config = {
-    backend_host: "http://127.0.0.1:8000",
+    backend_host: `${process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_HOST}`,
     maxLabelsLengthInCard: 3,
     authTokenKey: "authToken",
     months: [
