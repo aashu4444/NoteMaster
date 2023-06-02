@@ -60,7 +60,7 @@ const Notes = () => {
                     <button className="btn btn-blue" onClick={e => { setShowCreateNoteModal(true) }}><i className="fa fa-plus mr-2"></i>Create Note</button>
                 </div>
 
-                {notes.length === 0 && <p className="p-3 w-full md:w-auto bg-red-500 text-white rounded-md">Oops! you don't have any notes <button onClick={e => { setShowCreateNoteModal(true) }}>Click here</button> to create a note.</p>}
+                {notes.length === 0 && <p className="p-3 w-full md:w-auto bg-red-500 text-white rounded-md">Oops! you don&apos;t have any notes <button onClick={e => { setShowCreateNoteModal(true) }}>Click here</button> to create a note.</p>}
 
                 <div className="flex flex-col gap-y-5">
                     {classifiedNotes.map((item, key) => {

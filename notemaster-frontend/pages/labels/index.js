@@ -91,7 +91,7 @@ export default function Labels() {
 
           <div className="mt-4 mx-3 flex gap-5 flex-wrap">
             {labels.length === 0 &&
-              <p className="bg-red-500 rounded-md p-3 text-white">Oops! You don't have any labels. <button onClick={e => openCreateLabelModal()}>Click here</button> to create a new label</p>
+              <p className="bg-red-500 rounded-md p-3 text-white">Oops! You don&apos;t have any labels. <button onClick={e => openCreateLabelModal()}>Click here</button> to create a new label</p>
 
             }
 
