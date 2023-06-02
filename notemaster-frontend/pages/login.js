@@ -65,7 +65,7 @@ const Login = () => {
                     <footer className='mt-4 flex flex-col text-center gap-y-3'>
                         <button className="text-white bg-blue-500 rounded-full transition-opacity py-2 px-5 grow hover:bg-blue-600  transition-1">Login</button>
 
-                        <p className="text-gray-500">Don't have an account? <Link href="/signup"><a className="text-blue-600">Sign up</a></Link></p>
+                        <p className="text-gray-500">Don&apos;t have an account? <Link href="/signup"><a className="text-blue-600">Sign up</a></Link></p>
                     </footer>
                 </form>
             </div>
