@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 import { NotesContext } from '../../context/NotesContext';
 import Modal from '../Modal';
-import Link from 'next/Link';
+import Link from 'next/link';
 import { url, truncate } from '../Globals';
 
 const Managelabels = ({ note }) => {
